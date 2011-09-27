@@ -16,15 +16,16 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle "gmarik/vundle"
 
 " original repos on github
 Bundle "mattn/zencoding-vim"
-Bundle "drmingdrmer/xptemplate"
+"Bundle "drmingdrmer/xptemplate"
 
 " vim-scripts repos
 Bundle "L9"
+Bundle "snipMate"
 Bundle "FuzzyFinder"
 Bundle "bufexplorer.zip"
 Bundle "taglist.vim"
@@ -33,10 +34,13 @@ Bundle "The-NERD-tree"
 Bundle "matrix.vim"
 Bundle "closetag.vim"
 Bundle "The-NERD-Commenter"
+"Bundle "AuthorInfo"
 Bundle "matchit.zip"
 Bundle "AutoComplPop"
 Bundle "jsbeautify"
 Bundle "YankRing.vim"
+Bundle "surround.vim"
+Bundle "xml.vim"
 "Bundle 'html5.vim'
 filetype plugin indent on
 
@@ -110,8 +114,6 @@ set viminfo+=!				   " make sure it can save viminfo
 set guitablabel=%t             " 去掉tab上文件名的路径
 
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors & Fonts & Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -152,7 +154,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM 功能配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin  on 
+filetype plugin  on
 set nobackup                    " 覆盖文件时不备份
 set backupcopy=yes              " 设置备份时的行为为覆盖
 set autochdir                   " 自动切换当前目录为当前文件所在的目录
@@ -167,9 +169,9 @@ set mouse=a                     " Have the mouse enabled all the time
 set history=800                 " Sets how many lines of history VIM har to remember
 filetype indent on              " 自动格式化设置
 set autoread                    "自动更新
-set shellslash                   "路径问题
+"set shellslash                   "路径问题
 set dir-=.    " 设置缓冲区文件
-set clipboard+=unnamed          "让 Vim 的默认寄存器和系统剪贴板共享
+"set clipboard+=unnamed          "让 Vim 的默认寄存器和系统剪贴板共享
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost vimrc source ~/.vim_runtime/vimrc
@@ -203,22 +205,22 @@ language messages zh_CN.utf-8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Map auto complete of (, ", ', [,{
-"inoremap ( ()<esc>:let leavechar=")"<cr>i
-"inoremap [ []<esc>:let leavechar="]"<cr>i
-"inoremap { {}<esc>:let leavechar="}"<cr>i
-"inoremap < <><esc>:let leavechar=">"<cr>i
-"inoremap ' ''<esc>:let leavechar="'"<cr>i
-"inoremap " ""<esc>:let leavechar='"'<cr>i
-"inoremap )) (<esc>o)<esc>:let leavechar=")"<cr>O
-"inoremap ]] [<esc>o]<esc>:let leavechar="]"<cr>O
-"inoremap }} {<esc>o}<esc>:let leavechar="}"<cr>O
+inoremap ( ()<esc>:let leavechar=")"<cr>i
+inoremap [ []<esc>:let leavechar="]"<cr>i
+inoremap { {}<esc>:let leavechar="}"<cr>i
+inoremap < <><esc>:let leavechar=">"<cr>i
+inoremap ' ''<esc>:let leavechar="'"<cr>i
+inoremap " ""<esc>:let leavechar='"'<cr>i
+inoremap )) (<esc>o)<esc>:let leavechar=")"<cr>O
+inoremap ]] [<esc>o]<esc>:let leavechar="]"<cr>O
+inoremap }} {<esc>o}<esc>:let leavechar="}"<cr>O
 
-"vnoremap #( <esc>`>a)<esc>`<i(<esc>
-"vnoremap #[ <esc>`>a]<esc>`<i[<esc>
-"vnoremap #{ <esc>`>a}<esc>`<i{<esc>
-"vnoremap #< <esc>`>a><esc>`<i<<esc>
-"vnoremap #' <esc>`>a'<esc>`<i'<esc>
-"vnoremap #" <esc>`>a"<esc>`<i"<esc>
+vnoremap #( <esc>`>a)<esc>`<i(<esc>
+vnoremap #[ <esc>`>a]<esc>`<i[<esc>
+vnoremap #{ <esc>`>a}<esc>`<i{<esc>
+vnoremap #< <esc>`>a><esc>`<i<<esc>
+vnoremap #' <esc>`>a'<esc>`<i'<esc>
+vnoremap #" <esc>`>a"<esc>`<i"<esc>
 
 "map <leader>t2 :set shiftwidth=2<cr>
 "map <leader>t4 :set shiftwidth=4<cr>
@@ -375,13 +377,14 @@ language messages zh_CN.utf-8
     "  plugin - xptemplate.vim
     "------------------------------------------------------------------
     let g:xptemplate_vars = "SParg="
-    let g:xptemplate_brace_complete=1 
+    let g:xptemplate_brace_complete=1
 
     "------------------------------------------------------------------
     "  plugin - yankring.vim
     "  :YRShow 显示剪贴板
     "  <C-p> <C-n> 侧换剪贴板
     "------------------------------------------------------------------
+
 
 "===================================================================
 "  javascript
@@ -407,7 +410,7 @@ autocmd filetype html set dictionary=$VIMFILES/dict/html.dict
 ""map <F7> :call CheckPHPSyntax()<CR>
 ""function CheckPHPSyntax()
 ""    let codeanalyzercmd = '"'.$VIMRUNTIME.'\ZendCodeAnalyzer --disable var-arg-unused"'
-"" 
+""
 ""    let exeFile = expand("%:t")
 ""    let &makeprg = php_check_syntax_cmd
 ""    set errorformat=%f(line\ %l):\ %m
@@ -484,7 +487,7 @@ autocmd filetype html set dictionary=$VIMFILES/dict/html.dict
 "endfunction
 "au filetype php map <C-F7> :call ExecutePHPScript()<CR>
 "au filetype php imap <C-F7> <ESC>:call ExecutePHPScript()<CR>
-" 
+"
 "" Run a python script
 "function! ExecutePythonScript()
 "    if &filetype != 'python'
@@ -565,6 +568,11 @@ noremap! <M-k> <Up>
 noremap! <M-h> <left>
 noremap! <M-l> <Right>
 
+" 窗口间的移动设置。
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-l> <C-W>l
+map <C-h> <C-W>h
 
 " 全选
 map <leader>a ggVG
@@ -622,3 +630,14 @@ augroup QFixToggle
     autocmd BufWinEnter quickfix let g:qfix_win = bufnr("$")
     autocmd BufWinLeave * if exists("g:qfix_win") && expand("<abuf>") == g:qfix_win | unlet! g:qfix_win | endif
 augroup END
+
+function! RemoveTrailingWhitespace()
+    if &ft != "diff"
+        let b:curcol = col(".")
+        let b:curline = line(".")
+        silent! %s/\s\+$//
+        silent! %s/\(\s*\n\)\+\%$//
+        call cursor(b:curline, b:curcol)
+    endif
+endfunction
+autocmd BufWritePre * call RemoveTrailingWhitespace()
