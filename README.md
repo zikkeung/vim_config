@@ -27,9 +27,9 @@ clone  地址 git://github.com/hotoo/vimrc.git
 
 使用方法
 -----------
-将 ctags.exe 移进去 Vim\vim73 目录。
-新建 vimfiles\temp 目录，用来存放临时文件。
-下载 Consolas 字体。
+* 将 ctags.exe 移进去 Vim\vim73 目录。
+* 新建 vimfiles\temp 目录，用来存放临时文件。
+* 下载 Consolas 字体。
 
 
 本配置相关自定义快捷键

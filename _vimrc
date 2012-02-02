@@ -14,13 +14,31 @@ if has("unix")
     set fileformats=unix,dos,mac
     nmap <leader>e :tabnew $HOME/.vimrc<cr>
 	let $VIMFILES = $HOME."/.vim"
+	let helptags=$VIM.'\vimfiles\doc'
 else
     set fileformats=dos,unix,mac
     nmap <leader>e :tabnew $VIM/_vimrc<cr>
 	let $VIMFILES = $VIM."/vimfiles"
 	set directory=.,$TEMP
 	set directory=.,$VIM."/vimfiles/temp"
+	
+	" Chinese Docs
+	let helptags=$VIM.'\vimfiles\doc'
 endif
+
+if has("persistent_undo")
+    set undofile
+    set undolevels=1000
+
+    if has("win32")
+        set undodir=$VIM\undodir
+        au BufWritePre undodir/* setlocal noundofile
+    else
+        set undodir=~/.undodir
+        au BufWritePre ~/.undodir/* setlocal noundofile
+    endif
+endif
+
 
 " 获取当前目录
 func! GetPWD()
@@ -519,9 +537,18 @@ nmap <leader>q :q!<cr>
     "------------------------------------------------------------------
     "  plugin - mru.vim
     "------------------------------------------------------------------
-     let MRU_Max_Entries = 30
-     let MRU_Window_Height=10
-     let MRU_Auto_Close=1
+    let MRU_Max_Entries = 30
+    let MRU_Window_Height=10
+    let MRU_Auto_Close=1
+	if has("win32")
+		let MRU_File = $VIM.'\_vim_mru_files'
+	else
+		" try for Terminal.
+		try
+			let MRU_File = ~/.vim_mru_files
+		catch /.*/
+		endtry
+	endif
 	 
 	 
 	"------------------------------------------------------------------
@@ -537,3 +564,6 @@ nmap <leader>q :q!<cr>
 	set shellpipe=2>&1\|tee
 	set shellredir=>%s\ 2>&1
 	let g:session_directory=$VIMFILES
+
+"工作目录
+:cd E:\project
