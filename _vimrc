@@ -66,7 +66,8 @@ set helplang=cn
 " 保留历史记录
 set history=500
 
-" 行控制
+
+"" 行控制
 set linebreak " 英文单词在换行时不被截断
 set nocompatible " 设置不兼容VI
 "set textwidth=80 " 设置每行80个字符自动换行，加上换行符
@@ -292,10 +293,14 @@ endif
 
 " 全选
 map <leader>a ggVG
-
+"全选复制
+"map <C-A> ggVGY
 
 " Remove the Windows ^M
 map <leader>M :%s/\r//g<cr>
+
+"比较文件  
+nnoremap <F2> :vert diffsplit 
 
 "插入模式下使用 Meta 键（Windows下是Alt键）+自定义快捷键来移动光标。
 noremap! <M-j> <Down>
