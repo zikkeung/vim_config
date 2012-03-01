@@ -82,15 +82,30 @@ set noerrorbells
 set novisualbell
 set t_vb= " close visual bell
 
+set showmode                    " display the current mode
+
 " 行号和标尺
 set ruler " 显示标尺
 set number " 行号
 set rulerformat=%15(%c%V\ %p%%%)
 
+
 " 命令行于状态行
 set cmdheight=1        " 设置命令行的高度
-set laststatus=2       " 始终显示状态行
-set stl=\ [File]\ %F%m%r%h%y[%{&fileformat},%{&fileencoding}]\ %w\ \ [PWD]\ %r%{GetPWD()}%h\ %=\ [Line]%l/%L\ %=\[%P] "设置状态栏的信息
+"set laststatus=2       " 始终显示状态行
+"set stl=\ [File]\ %F%m%r%h%y[%{&fileformat},%{&fileencoding}]\ %w\ \ [PWD]\ %r%{GetPWD()}%h\ %=\ [Line]%l/%L\ %=\[%P] "设置状态栏的信息
+
+if has('statusline')
+    set laststatus=2
+
+    " Broken down into easily includeable segments
+    set statusline=%<%f\    " Filename
+    set statusline+=%w%h%m%r " Options
+    set statusline+=%{fugitive#statusline()} "  Git Hotness
+    set statusline+=\ [%{&ff}/%Y]            " filetype
+    set statusline+=\ [%{getcwd()}]          " current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
 
 
 " 搜索
@@ -140,8 +155,9 @@ set iskeyword+=_,$,@,%,#,-
 
 
 set wildmenu "打开 wildmenu 选项，启动具有菜单项提示的命令行自动完成。
+set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
 set matchpairs=(:),{:},[:],<:>
-set whichwrap=b,s,<,>,[,]
+set whichwrap=b,s,h,l,<,>,[,]
 
 
 "光标可以定位在没有实际字符的地方
@@ -212,7 +228,10 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>
     \endif<CR>
 
 
-
+set foldenable                  " auto fold code
+set list
+set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+	
 " =====================
 " AutoCmd 自动运行
 " =====================
@@ -300,7 +319,7 @@ endif
 map <leader>M :%s/\r//g<cr>
 
 "比较文件  
-nnoremap <F2> :vert diffsplit 
+"nnoremap <F2> :vert diffsplit 
 
 "插入模式下使用 Meta 键（Windows下是Alt键）+自定义快捷键来移动光标。
 noremap! <M-j> <Down>
@@ -566,19 +585,19 @@ nmap <leader>q :q!<cr>
             \ 'file': '\.exe$\|\.so$\|\.dll$' }
 			
 	 
-	"------------------------------------------------------------------
-    "  plugin -  Session.vim
-    "------------------------------------------------------------------
-	"自动载入会话
-	"let g:session_autoload = 1
-	"自动保存会话
-	"let g:session_autosave = 1
-	set shellquote=
-	set shellslash
-	set shellxquote=
-	set shellpipe=2>&1\|tee
-	set shellredir=>%s\ 2>&1
-	let g:session_directory=$VIMFILES
+	""------------------------------------------------------------------
+    ""  plugin -  Session.vim
+    ""------------------------------------------------------------------
+	""自动载入会话
+	""let g:session_autoload = 1
+	""自动保存会话
+	""let g:session_autosave = 1
+	"set shellquote=
+	"set shellslash
+	"set shellxquote=
+	"set shellpipe=2>&1\|tee
+	"set shellredir=>%s\ 2>&1
+	"let g:session_directory=$VIMFILES
 
 "工作目录
 :cd E:\project
