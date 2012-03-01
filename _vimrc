@@ -1,6 +1,6 @@
 "=========================================================================
 " DesCRiption: 适合于编写HTML、CSS、javascript、php
-" Last Change: 2011年07月31日
+" Last Change: 2012年03月01日
 " Author:      (强哥仔)Johnny
 " Blog:        http://www.cnblogs.com/qiangji/
 " Version:     3.0
@@ -292,7 +292,7 @@ else
 endif
 
 " 全选
-map <leader>a ggVG
+"map <leader>a ggVG
 "全选复制
 "map <C-A> ggVGY
 
