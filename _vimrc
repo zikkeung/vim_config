@@ -542,19 +542,29 @@ nmap <leader>q :q!<cr>
     "------------------------------------------------------------------
     "  plugin - mru.vim
     "------------------------------------------------------------------
-    let MRU_Max_Entries = 30
-    let MRU_Window_Height=10
-    let MRU_Auto_Close=1
-	if has("win32")
-		let MRU_File = $VIM.'\_vim_mru_files'
-	else
-		" try for Terminal.
-		try
-			let MRU_File = ~/.vim_mru_files
-		catch /.*/
-		endtry
-	endif
-	 
+    "let MRU_Max_Entries = 30
+    "let MRU_Window_Height=10
+    "let MRU_Auto_Close=1
+	"if has("win32")
+	"	let MRU_File = $VIM.'\_vim_mru_files'
+	"else
+	"	" try for Terminal.
+	"	try
+	"		let MRU_File = ~/.vim_mru_files
+	"	catch /.*/
+	"	endtry
+	"endif
+	
+	"------------------------------------------------------------------
+    "  plugin - ctrlp.vim
+    "------------------------------------------------------------------
+	let g:ctrlp_map = '<c-p>'
+	let g:ctrlp_working_path_mode = 2
+	
+	 let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+            \ 'file': '\.exe$\|\.so$\|\.dll$' }
+			
 	 
 	"------------------------------------------------------------------
     "  plugin -  Session.vim
