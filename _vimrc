@@ -228,9 +228,9 @@ map <silent> <F2> :if &guioptions =~# 'T' <Bar>
     \endif<CR>
 
 
-set foldenable                  " auto fold code
-set list
-set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+"set foldenable                  " auto fold code
+"set list
+"set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 	
 " =====================
 " AutoCmd 自动运行
